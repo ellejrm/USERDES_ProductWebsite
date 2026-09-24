@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundPH Headset</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: #17202a;
+      background: #fff;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1180px, 92%); margin: auto; }
+    nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #edf0f2;
+      background: rgba(255,255,255,.96);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -.04em; }
+    .links { display: flex; gap: 34px; font-size: .9rem; color: #4f5a65; }
+    .icons { display: flex; gap: 18px; font-size: 1.15rem; }
+    .menu { display: none; }
+
+    .hero {
+      min-height: 520px;
+      background: linear-gradient(105deg, #eef5fa 0%, #dce9f1 55%, #eef2f4 100%);
+      overflow: hidden;
+    }
+    .main-box {
+      min-height: 520px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+      max-width: 650px;
+    }
+
+    .main-text {
+      padding-top: 50px;
+    }
+
+    .main-text p {
+       max-width: 510px;
+      margin: 22px 0 28px;
+      color: #526171;
+      font-size: 1.02rem;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: #111a22;
+      color: white;
+      font-weight: 700;
+      font-size: .9rem;
+      transition: transform .2s, opacity .2s;
+    }
+    .button:hover { transform: translateY(-2px); opacity: .9; }
+    .main-picture {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .main-picture img {
+      width: min(82%, 400px);
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 24px;
+      mix-blend-mode: multiply;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid #edf0f2;
+    }
+    .feature {
+      padding: 38px 20px;
+      text-align: center;
+      border-right: 1px solid #edf0f2;
+    }
+    .feature:last-child { border-right: 0; }
+    .icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .feature h3 { font-size: .95rem; margin-bottom: 5px; }
+    .feature p { font-size: .78rem; color: #778390; }
+
+    .story {
+      padding: 90px 0;
+    }
+    .about-box {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .story h2 {
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      margin-bottom: 20px;
+    }
+    .story p { color: #65717d; max-width: 470px; margin-bottom: 26px; }
+    .about-picture {
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+    }
+
+    .dark-part {
+      background: #172027;
+      color: white;
+      padding: 70px 0;
+      text-align: center;
+    }
+    .dark-part h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.04em;
+    }
+    .dark-part > p { color: #b8c0c6; margin: 8px 0 38px; }
+    .uses {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .use { padding: 18px; }
+    .use-icon { font-size: 1.7rem; margin-bottom: 8px; }
+    .use h3 { font-size: .95rem; }
+    .use p { color: #aab4bc; font-size: .82rem; }
+
+    .cta { padding: 42px 0; }
+    .shop-box {
+      background: #edf5f9;
+      border-radius: 18px;
+      min-height: 170px;
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      padding: 25px 45px;
+    }
+    .shop-box img {
+      width: 130px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 16px;
+      mix-blend-mode: multiply;
+    }
+    .shop-box .small-title { margin-bottom: 3px; }
+    .shop-box h2 { font-size: 1.5rem; margin-bottom: 14px; }
+
+    footer {
+      border-top: 1px solid #edf0f2;
+      padding: 25px 0;
+      color: #687580;
+      font-size: .8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 800px) {
+      .links { display: none; }
+      .menu { display: inline; }
+      .main-box {
+        grid-template-columns: 1fr;
+        padding: 55px 0 0;
+      }
+      .main-text { padding-bottom: 35px; }
+      .main-picture { min-height: 330px; }
+      .main-picture img { width: 100%; max-width: 380px; }
+      .features { grid-template-columns: repeat(2, 1fr); }
+      .feature:nth-child(2) { border-right: 0; }
+      .feature:nth-child(-n+2) { border-bottom: 1px solid #edf0f2; }
+      .about-box { grid-template-columns: 1fr; gap: 35px; }
+      .story { padding: 65px 0; }
+      .uses { grid-template-columns: 1fr; gap: 10px; }
+      .shop-box { padding: 25px; }
+    }
+
+    @media (max-width: 500px) {
+      nav { height: 62px; }
+      .logo { font-size: 1.15rem; }
+      .icons { gap: 12px; }
+      .main-box { min-height: auto; }
+      h1 { font-size: 2.8rem; }
+      .main-text p { font-size: .92rem; }
+      .features { grid-template-columns: 1fr; }
+      .feature { border-right: 0; border-bottom: 1px solid #edf0f2; }
+      .feature:last-child { border-bottom: 0; }
+      .story h2 { font-size: 2.45rem; }
+      .shop-box { display: grid; grid-template-columns: 90px 1fr; gap: 18px; }
+      .shop-box img { width: 90px; height: 90px; }
+      .shop-box h2 { font-size: 1.2rem; }
+      footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav style="background:white;">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%; padding: 0 30px;">
+      <a class="logo" href="#">SoundPH</a>
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#features">Products</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="icons">
+        <span title="Search">⌕</span>
+        <span title="Cart">🛒</span>
+        <span class="menu" title="Menu">☰</span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home" style="color:#17202a;">
+      <div class="container main-box">
+        <div class="main-text">
+          <h1>Listen with Comfort<br>All Day</h1>
+          <p>Experience rich audio and modern design with the SoundPH Headset.</p>
+          <a class="button" href="productdetails.html">Shop Now <span>→</span></a>
+        </div>
+        <div class="main-picture">
+          <img src="headset-hero.png">
+        </div>
+      </div>
+    </section>
+
+    <section class="container features" id="features">
+      <article class="feature">
+        <div class="icon">♬</div>
+        <h3>High-Quality Audio</h3>
+        <p>Crisp highs and deep bass</p>
+      </article>
+      <article class="feature">
+        <div class="icon">♧</div>
+        <h3>All-Day Comfort</h3>
+        <p>Soft, comfortable ear cushions</p>
+      </article>
+      <article class="feature">
+        <div class="icon">▣</div>
+        <h3>Long Battery Life</h3>
+        <p>Up to 50 hours</p>
+      </article>
+      <article class="feature">
+        <div class="icon">⌁</div>
+        <h3>Bluetooth 5.3</h3>
+        <p>Stable & fast connection</p>
+      </article>
+    </section>
+
+    <section class="story" id="about">
+      <div class="container about-box">
+        <div>
+          <div class="small-title">Why choose SoundPH?</div>
+          <h2>Designed for Your<br>Everyday Music</h2>
+          <p>Whether you're working, studying, or just relaxing, SoundPH Headset always delivers an amazing listening experience.</p>
+          <a class="button" href="#shop">Learn More</a>
+        </div>
+        <img class="about-picture" src="headset-style.jpg">
+      </div>
+    </section>
+
+    <section class="dark-part">
+      <div class="container">
+        <h2 style="margin-bottom:10px;">Great Sound. Greater Moments.</h2>
+        <p>Made for the moments that matter.</p>
+        <div class="uses">
+          <article class="use">
+            <div class="use-icon">♫</div>
+            <h3>For Music Lovers</h3>
+            <p>Feel every beat</p>
+          </article>
+          <article class="use">
+            <div class="use-icon">▱</div>
+            <h3>For Work & Study</h3>
+            <p>Stay focused on your tasks</p>
+          </article>
+          <article class="use">
+            <div class="use-icon">✈</div>
+            <h3>For Travel</h3>
+            <p>Take your music everywhere</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="shop">
+      <div class="container">
+        <div class="shop-box">
+          <img src="headset1.png">
+          <div>
+            <div class="small-title">Ready to upgrade?</div>
+            <h2>Get Your SoundPH Headset Today</h2>
+            <a class="button" href="productdetails.html">Shop Now <span>→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container" style="background:white;">
+    <span>© 2026 SoundPH. All rights reserved.</span>
+    <span>Instagram · Facebook · X</span>
+  </footer>
+</body>
+</html>
